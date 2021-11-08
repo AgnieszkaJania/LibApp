@@ -37,23 +37,36 @@ namespace LibApp.Controllers
             return Content("id " + id);
         }
 
-        public IActionResult Index(int? pageIndex, string sortBy)
+        public IActionResult Index()
         {
-            if (!pageIndex.HasValue)
-            {
-                pageIndex = 1;
-            }
-            if (String.IsNullOrEmpty(sortBy))
-            {
-                sortBy = "Name";
-            }
+            //if (!pageIndex.HasValue)
+            //{
+            //    pageIndex = 1;
+            //}
+            //if (String.IsNullOrEmpty(sortBy))
+            //{
+            //    sortBy = "Name";
+            //}
 
-            return Content($"pageIndex = {pageIndex} & sortBy = {sortBy}");
+            //return Content($"pageIndex = {pageIndex} & sortBy = {sortBy}");
+            //end
+            var books = GetBooks();
+            return View(books);
+
         }
         [Route("books/released/{year:regex(^\\d{{4}}$)}/{month:range(1,12)}")]
         public IActionResult ByReleaseDate(int year, int month)
         {
             return Content(year + "/" + month);
+        }
+
+        private IEnumerable<Book> GetBooks()
+        {
+            return new List<Book>
+            {
+                new Book{ Id = 1, Name = "Hamlet"},
+                new Book {Id = 2, Name = "Ulysses"}
+            };
         }
     }
 }
