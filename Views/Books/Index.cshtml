@@ -12,14 +12,18 @@
     <thead>
         <tr>
             <th>Book</th>
+            <th colspan="2">Genre</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var book in Model)
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => book.Name)</td>
-                </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => book.Name)</td>
+            <td>@Html.DisplayFor(modelItem => book.Genre.Name)</td>
+            <td><a asp-action="Details" asp-route-id="@book.Id">Details</a></td>
+
+        </tr>
             }
     </tbody>
 

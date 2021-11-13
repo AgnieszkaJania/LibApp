@@ -5,13 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using LibApp.Models;
 using LibApp.ViewModels;
+using LibApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibApp.Controllers
 {
     public class BooksController : Controller
     {
-       //GET /Books/Random
-
+        //GET /Books/Random
+        private readonly ApplicationDbContext _context;
+        public BooksController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Random()
         {
             var firstBook = new Book() { Name = "English dictionary" };
@@ -39,19 +45,20 @@ namespace LibApp.Controllers
 
         public IActionResult Index()
         {
-            //if (!pageIndex.HasValue)
-            //{
-            //    pageIndex = 1;
-            //}
-            //if (String.IsNullOrEmpty(sortBy))
-            //{
-            //    sortBy = "Name";
-            //}
 
-            //return Content($"pageIndex = {pageIndex} & sortBy = {sortBy}");
-            //end
-            var books = GetBooks();
+            var books = _context.Books
+                .Include(c => c.Genre)
+                .ToList();
             return View(books);
+
+        }
+        public IActionResult Details(int id)
+        {
+
+            var book = _context.Books
+                .Include(b => b.Genre)
+                .SingleOrDefault(b => b.Id == id);
+            return View(book);
 
         }
         [Route("books/released/{year:regex(^\\d{{4}}$)}/{month:range(1,12)}")]
