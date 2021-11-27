@@ -1,5 +1,6 @@
 ﻿using LibApp.Data;
 using LibApp.Models;
+using LibApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,6 +36,23 @@ namespace LibApp.Controllers
                 return Content("User not found");
             }
             return View(customer);
+        }
+
+        public IActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult Create(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
         }
        //private IEnumerable<Customer> GetCustomers()
        // {
