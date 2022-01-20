@@ -8,8 +8,9 @@ using LibApp.ViewModels;
 using LibApp.Data;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace LibApp.Controllers
-{
+{   
     public class BooksController : Controller
     {
         //GET /Books/Random
