@@ -20,7 +20,7 @@ namespace LibApp.Controllers.Api
             _context = context;
         }
         [HttpPost]
-        public IActionResult CreateNewRental(NewRentalDto newRental)
+        public IActionResult CreateNewRental([FromBody] NewRentalDto newRental)
         {   
            
             var customer = _context.Customers
