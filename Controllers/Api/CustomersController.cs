@@ -46,7 +46,7 @@ namespace LibApp.Controllers.Api
         }
 
         // GET /api/customers/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCustomer")]
         public async Task<IActionResult> GetCustomer(int id)
         {
             Console.WriteLine("Request START");
