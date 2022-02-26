@@ -64,7 +64,6 @@ namespace LibApp.Controllers.Api
             _bookRepository.Add(book);
             _bookRepository.Save();
             bookDto.Id = book.Id;
-
             return CreatedAtRoute(nameof(Get), new { id = bookDto.Id }, bookDto);
         }
         // PUT /api/books

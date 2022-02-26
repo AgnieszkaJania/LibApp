@@ -64,7 +64,7 @@ namespace LibApp.Controllers
                 bookInDb.AuthorName = book.AuthorName;
                 bookInDb.GenreId = book.GenreId;
                 bookInDb.ReleaseDate = book.ReleaseDate;
-                bookInDb.DateAdded = book.DateAdded;
+                //bookInDb.DateAdded = book.DateAdded;
                 bookInDb.NumberInStock = book.NumberInStock;
             }
             try
