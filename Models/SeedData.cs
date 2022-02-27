@@ -1,4 +1,5 @@
 ﻿using LibApp.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -10,12 +11,13 @@ namespace LibApp.Models
 {
     public static class SeedData
     {
-        public static void Initialize(IServiceProvider serviceProvider)
+        public static  void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new ApplicationDbContext(
                     serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 ))
             {
+                
                 if (context.MembershipTypes.Any())
                 {
                     Console.WriteLine("MembershipTypes already seeded");
@@ -133,7 +135,9 @@ namespace LibApp.Models
                        AuthorName = "J.K.Rowling",
                        GenreId = 2,
                        ReleaseDate = new DateTime(1990, 3, 10),
-                       NumberInStock = 20
+                       NumberInStock = 20,
+                       NumberAvailable = 20,
+                       DateAdded = DateTime.Now
                    },
                    new Book
                    {
@@ -141,7 +145,9 @@ namespace LibApp.Models
                        AuthorName = "George Orwell",
                        GenreId = 3,
                        ReleaseDate = new DateTime(1949, 6, 8),
-                       NumberInStock = 10
+                       NumberInStock = 10,
+                       NumberAvailable = 10,
+                       DateAdded = DateTime.Now
                    },
                    new Book
                    {
@@ -149,10 +155,23 @@ namespace LibApp.Models
                        AuthorName = "Stephen King",
                        GenreId = 1,
                        ReleaseDate = new DateTime(1986, 9, 15),
-                       NumberInStock = 50
+                       NumberInStock = 50,
+                       NumberAvailable = 50,
+                       DateAdded = DateTime.Now
+                   },
+                   new Book
+                   {
+                       Name = "Kane i Abel",
+                       AuthorName = "Jeffrey Archer",
+                       GenreId = 1,
+                       ReleaseDate = new DateTime(1979, 10, 13),
+                       NumberInStock = 14,
+                       NumberAvailable = 14,
+                       DateAdded = DateTime.Now
                    });
+
                 }
-               
+
                 context.SaveChanges();
             }
         }

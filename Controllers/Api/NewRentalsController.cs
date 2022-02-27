@@ -14,7 +14,7 @@ namespace LibApp.Controllers.Api
     [Route("api/[controller]")]
     [ApiController]
     public class NewRentalsController : ControllerBase
-    {   
+    {
         public NewRentalsController(ApplicationDbContext context)
         {
             _context = context;
@@ -55,5 +55,6 @@ namespace LibApp.Controllers.Api
             return Ok();
         }
         private readonly ApplicationDbContext _context;
+
     }
 }

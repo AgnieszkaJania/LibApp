@@ -23,7 +23,6 @@ namespace LibApp.Controllers
             _bookRepository = bookRepository;
         }
 
-
         public IActionResult Edit(int id)
         {
             var book = _bookRepository.Get(id);
@@ -55,6 +54,7 @@ namespace LibApp.Controllers
             if(book.Id == 0)
             {
                 book.DateAdded = DateTime.Now;
+                book.NumberAvailable = book.NumberInStock;
                 _bookRepository.Add(book);
             }
             else

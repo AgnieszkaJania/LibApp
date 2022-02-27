@@ -31,6 +31,7 @@ namespace LibApp.Controllers.Api
 
         // GET /api/customers
         [HttpGet]
+        [Authorize(Roles = "StoreManager,Owner")]
         public IActionResult GetCustomers(string query = null)
         {
             IEnumerable<Customer> customersQuery = _context.Customers
@@ -47,6 +48,7 @@ namespace LibApp.Controllers.Api
 
         // GET /api/customers/{id}
         [HttpGet("{id}", Name = "GetCustomer")]
+        [Authorize(Roles = "StoreManager,Owner")]
         public async Task<IActionResult> GetCustomer(int id)
         {
             Console.WriteLine("Request START");
@@ -65,6 +67,7 @@ namespace LibApp.Controllers.Api
 
         // POST /api/customers
         [HttpPost]
+        [Authorize(Roles = "Owner")]
         public CustomerDto CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
@@ -83,6 +86,7 @@ namespace LibApp.Controllers.Api
 
         // PUT /api/customers/{id}
         [HttpPut("{id}")]
+        [Authorize(Roles = "Owner")]
         public void UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
@@ -103,6 +107,7 @@ namespace LibApp.Controllers.Api
 
         // DELETE /api/customers/{id}
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Owner")]
         public void DeleteCustomer(int id)
         {
             var customerInDb = _context.Customers.Single(c => c.Id == id);
